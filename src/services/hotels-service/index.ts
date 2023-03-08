@@ -25,6 +25,13 @@ async function getHotels(userId: number) {
   return hotels;
 }
 
+async function getAllHotelsWithRooms(userId: number) {
+  await listHotels(userId);
+
+  const hotels = await hotelRepository.findAllHotelsWithRooms();
+  return hotels
+}
+
 async function getHotelsWithRooms(userId: number, hotelId: number) {
   await listHotels(userId);
   const hotel = await hotelRepository.findRoomsByHotelId(hotelId);
@@ -38,6 +45,7 @@ async function getHotelsWithRooms(userId: number, hotelId: number) {
 const hotelService = {
   getHotels,
   getHotelsWithRooms,
+  getAllHotelsWithRooms
 };
 
 export default hotelService;
