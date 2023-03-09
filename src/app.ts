@@ -10,6 +10,7 @@ loadEnv();
 import { handleApplicationErrors } from "@/middlewares";
 import {
   usersRouter,
+  githubRouter,
   authenticationRouter,
   eventsRouter,
   enrollmentsRouter,
@@ -25,6 +26,7 @@ app
   .use(express.json())
   .get("/health", (_req, res) => res.send("OK!"))
   .use("/users", usersRouter)
+  .use("/github", githubRouter)
   .use("/auth", authenticationRouter)
   .use("/event", eventsRouter)
   .use("/enrollments", enrollmentsRouter)
