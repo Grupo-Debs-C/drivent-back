@@ -3,6 +3,7 @@ import roomRepository from "@/repositories/room-repository";
 import bookingRepository from "@/repositories/booking-repository";
 import enrollmentRepository from "@/repositories/enrollment-repository";
 import tikectRepository from "@/repositories/ticket-repository";
+import hotelRepository from "@/repositories/hotel-repository";
 
 async function checkEnrollmentTicket(userId: number) {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
@@ -30,11 +31,20 @@ async function checkValidBooking(roomId: number) {
 
 async function getBooking(userId: number) {
   const booking = await bookingRepository.findByUserId(userId);
+  
   if (!booking) {
     throw notFoundError();
   }
+  const bookingForTheRoom = await bookingRepository.findByRoomId(booking.Room.id);
+  const hotel = await hotelRepository.findRoomsByHotelId(booking.Room.hotelId);
 
-  return booking;
+  const completeBooking = {
+    ...booking,
+    occupancy: bookingForTheRoom.length,
+    hotelName: hotel.name,
+    hotelImage: hotel.image
+  }
+  return completeBooking;
 }
 
 async function bookingRoomById(userId: number, roomId: number) {
