@@ -9,6 +9,9 @@ export async function listBooking(req: AuthenticatedRequest, res: Response) {
     const booking = await bookingService.getBooking(userId);
     return res.status(httpStatus.OK).send({
       id: booking.id,
+      occupancy: booking.occupancy,
+      hotelName: booking.hotelName,
+      hotelImage: booking.hotelImage,
       Room: booking.Room,
     });
   } catch (error) {
