@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 async function main() {
   let event: (string | null) = await redis.get("event");
 
-  event = JSON.parse(event || '')
+
 
   if (!event) {
     await redis.set("event", JSON.stringify({

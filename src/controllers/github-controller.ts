@@ -13,7 +13,7 @@ export async function github(req: Request, res: Response) {
      const body ={
         code,
         grant_type:'authorization_code',
-        redirect_uri: 'http://localhost:3000/sign-in',
+        redirect_uri: 'https://drivent-frontend-wheat.vercel.app/sign-in',
         client_id:'8b03db19625ccc7dad31',
         client_secret:"aef2208dd4cbf6099b9e3ff9d8763b85468ef532"
     }
