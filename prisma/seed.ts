@@ -20,14 +20,19 @@ async function main() {
 
   console.log({ event });
 
-/*   await prisma.locality.createMany({
-        data: [
-            { id:1, name: "Auditório Principal" },
-            { id:2, name: "Auditório Lateral" },
-            { id: 3, name: "Sala de Workshop" }
-          ]
-    }) */
+  await prisma.locality.createMany({
+      data: [
+          { id:1, name: "Auditório Principal" },
+          { id:2, name: "Auditório Lateral" },
+          { id: 3, name: "Sala de Workshop" }
+        ]
+    })
+  
+  await prisma.activities.createMany({
+    data:[
 
+    ]
+  })
 }
 
 main()
