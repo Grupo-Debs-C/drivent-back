@@ -2,7 +2,7 @@ import { notFoundError } from "@/errors";
 import activityRepository from "@/repositories/activities-repository";
 import activitiesServiceHelpers from "./helpers";
 
-async function getAllActivities() {
+async function findAllActivities() {
   const activities = await activityRepository.findAllActivities();
 
   if (!activities) {
@@ -28,7 +28,7 @@ async function findActivitiesByLocalityAndDay(date: string, localityId: number) 
 }
 
 const activitiesService = {
-  getAllActivities,
+  findAllActivities,
   findActivitiesByLocalityAndDay
 };
 
