@@ -9,9 +9,11 @@ async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, 
     where: {
       localityId,
       startAt: {
-        lte: startDay,
-        gte: endDay
-      }
+        gte: new Date(startDay).toISOString(),
+      },
+      endsAt: {
+        lte: new Date(endDay).toISOString(),
+      } 
     }
   });
 }
