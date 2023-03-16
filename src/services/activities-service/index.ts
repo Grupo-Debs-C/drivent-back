@@ -18,7 +18,13 @@ async function findActivitiesByLocalityAndDay(date: string, localityId: number) 
     throw notFoundError();
   }
 
-  return activities;
+  const approvedActivities = activitiesServiceHelpers.approvedActivities(activities);
+
+  if (!approvedActivities) {
+    throw notFoundError();
+  }
+
+  return approvedActivities;
 }
 
 const activitiesService = {
