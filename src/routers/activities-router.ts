@@ -5,7 +5,7 @@ import { getAllActivities, getActivitiesByLocalityAndDay } from "@/controllers";
 const activityRouter = Router();
 
 activityRouter
-  //.all("/*", authenticateToken)
+  .all("/*", authenticateToken)
   .get("/all", getAllActivities)
   .get("", getActivitiesByLocalityAndDay)
 

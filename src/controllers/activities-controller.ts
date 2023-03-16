@@ -3,9 +3,7 @@ import activitiesService from "@/services/activities-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
-//export async function getAllActivities(req: AuthenticatedRequest, res: Response) {
-export async function getAllActivities(req: Request, res: Response) {
-
+export async function getAllActivities(req: AuthenticatedRequest, res: Response) {
   try {
     const activities = await activitiesService.findAllActivities();
 
