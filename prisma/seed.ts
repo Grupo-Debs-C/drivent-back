@@ -12,21 +12,21 @@ async function main() {
         title: "Driven.t",
         logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
         backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
-        startsAt: "2023-10-22 00:00:00.01",
-        endsAt: "2023-10-24 23:59:00.00",
+        startsAt: dayjs().toDate(),
+        endsAt: dayjs().add(3, "days").toDate(),
       },
     }));
   }
 
   console.log({ event });
 
-  await prisma.locality.createMany({
+/*   await prisma.locality.createMany({
         data: [
-            { name: "Auditório Principal" },
-            { name: "Auditório Lateral" },
-            { name: "Sala de Workshop" }
+            { id:1, name: "Auditório Principal" },
+            { id:2, name: "Auditório Lateral" },
+            { id: 3, name: "Sala de Workshop" }
           ]
-    })
+    }) */
 
 }
 

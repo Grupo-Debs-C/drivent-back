@@ -4,7 +4,7 @@ async function findAllActivities() {
   return prisma.activities.findMany();
 }
 
-async function findActivitiesByLocality(startDay: string, endDay: string, localityId: number) {
+async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, localityId: number) {
   return prisma.activities.findMany({
     where: {
       localityId,
@@ -18,7 +18,7 @@ async function findActivitiesByLocality(startDay: string, endDay: string, locali
  
 const activityRepository = {
   findAllActivities,
-  findActivitiesByLocality
+  findActivitiesByLocalityAndDay
 };
 
 export default activityRepository;
