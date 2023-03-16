@@ -1,7 +1,7 @@
 import { prisma } from "@/config";
 
 async function findVacancyByActivityId(activityId: number) {
-  return prisma.vacancy.findFirst({
+  return prisma.vacancy.findMany({
     where: {
       activitiesId: activityId,
     }
