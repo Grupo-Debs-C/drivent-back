@@ -11,8 +11,8 @@ async function main() {
         title: "Driven.t",
         logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
         backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
-        startsAt: dayjs().add(1, "days").hour(6).minute(0).second(0).millisecond(0).toDate(),
-        endsAt: dayjs().add(3, "days").hour(20).minute(59).second(59).millisecond(599).toDate(),
+        startsAt: dayjs().hour(6).minute(0).second(0).millisecond(0).toDate(),
+        endsAt: dayjs().add(2, "days").hour(20).minute(59).second(59).millisecond(599).toDate(),
       },
     });
   }
@@ -43,6 +43,14 @@ async function main() {
         updatedAt: dayjs().toDate()
       }
     ]
+  })
+
+  await prisma.hotel.create({
+    data: {
+      name: 'Hotel',
+      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/1a/ea/54/hotel-presidente-4s.jpg?w=700&h=-1&s=1',
+      updatedAt: dayjs().toDate()
+    }
   })
 
   await prisma.locality.createMany({
