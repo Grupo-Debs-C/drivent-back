@@ -3,7 +3,6 @@ import { Event } from "@prisma/client";
 
 async function findFirst() {
   let eventCache = JSON.parse(await redis.get("event"));
-  console.log(eventCache);
   if (!eventCache) {
     let event = await prisma.event.findFirst();
     await redis.set('event', JSON.stringify(event))
