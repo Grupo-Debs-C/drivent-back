@@ -14,3 +14,14 @@ export function createEvent(params: Partial<Event> = {}): Promise<Event> {
     },
   });
 }
+
+export function createEvent2() {
+  return prisma.event.create({
+    data: {
+      title: faker.name.findName(),
+      logoImageUrl: faker.internet.avatar(),
+      backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
+      startsAt: dayjs().toDate(),
+      endsAt: dayjs().add(21, "days").toDate(),
+    }})
+}

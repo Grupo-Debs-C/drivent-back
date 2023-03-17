@@ -13,7 +13,7 @@ async function main() {
         logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
         backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
         startsAt: dayjs().toDate(),
-        endsAt: dayjs().add(3, "days").toDate(),
+        endsAt: dayjs().add(21, "days").toDate(),
       }, 
     }));
 
@@ -23,7 +23,7 @@ async function main() {
         logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
         backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
         startsAt: dayjs().toDate(),
-        endsAt: dayjs().add(3, "days").toDate(),
+        endsAt: dayjs().add(21, "days").toDate(),
       }})
     
   }
@@ -51,36 +51,36 @@ async function main() {
         Name: "Minecraft: montando o PC ideal", 
         eventId: Number(eventInformation?.id), 
         localityId: 1, 
-        startAt: dayjs().add(1, "days").hour(9).minute(0).second(0).format(), 
-        endsAt: dayjs().add(1, "days").hour(10).minute(0).second(0).format(), 
+        startAt: dayjs().add(10, "days").hour(9).minute(0).second(0).format(), 
+        endsAt: dayjs().add(10, "days").hour(10).minute(0).second(0).format(), 
         vacancyLimit: 30},
       {
         Name: "LoL: montando o PC ideal", 
         eventId: Number(eventInformation?.id), 
         localityId: 1, 
-        startAt: dayjs().add(1, "days").hour(10).minute(0).second(0).format(), 
-        endsAt: dayjs().add(1, "days").hour(11).minute(0).second(0).format(), 
+        startAt: dayjs().add(10, "days").hour(10).minute(0).second(0).format(), 
+        endsAt: dayjs().add(10, "days").hour(11).minute(0).second(0).format(), 
         vacancyLimit: 30},
       {
         Name: "Palestra X", 
         eventId: Number(eventInformation?.id), 
-        localityId: 1, 
-        startAt: dayjs().add(2, "days").hour(9).minute(0).second(0).format(), 
-        endsAt: dayjs().add(2, "days").hour(11).minute(0).second(0).format(), 
+        localityId: 2, 
+        startAt: dayjs().add(11, "days").hour(9).minute(0).second(0).format(), 
+        endsAt: dayjs().add(11, "days").hour(11).minute(0).second(0).format(), 
         vacancyLimit: 30},
       {
         Name: "Palestra y", 
         eventId: Number(eventInformation?.id), 
-        localityId: 1, 
-        startAt: dayjs().add(3, "days").hour(9).minute(0).second(0).format(), 
-        endsAt: dayjs().add(3, "days").hour(10).minute(0).second(0).format(), 
+        localityId: 3, 
+        startAt: dayjs().add(12, "days").hour(9).minute(0).second(0).format(), 
+        endsAt: dayjs().add(12, "days").hour(10).minute(0).second(0).format(), 
         vacancyLimit: 30},
       {
         Name: "Palestra z", 
         eventId: Number(eventInformation?.id), 
-        localityId: 1, 
-        startAt: dayjs().add(3, "days").hour(10).minute(0).second(0).format(), 
-        endsAt: dayjs().add(3, "days").hour(11).minute(0).second(0).format(), 
+        localityId: 3, 
+        startAt: dayjs().add(12, "days").hour(10).minute(0).second(0).format(), 
+        endsAt: dayjs().add(12, "days").hour(11).minute(0).second(0).format(), 
         vacancyLimit: 3},   
     ]
   })
