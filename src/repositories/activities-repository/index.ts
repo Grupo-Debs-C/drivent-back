@@ -4,17 +4,8 @@ async function findAllActivities() {
   return prisma.activities.findMany();
 }
 
-async function findLocalitiesByDay(date: string) {
-  return prisma.activities.findMany({
-    where: {
-      startAt: {
-        gte: new Date(date).toISOString(),
-      }
-    },
-    select: {
-      Locality: true,
-    }
-  });
+async function findLocalities() {
+  return prisma.locality.findMany({});
 }
 
 async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, localityId: number) {
@@ -30,10 +21,10 @@ async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, 
     }
   });
 }
- 
+
 const activityRepository = {
   findAllActivities,
-  findLocalitiesByDay,
+  findLocalities,
   findActivitiesByLocalityAndDay
 };
 

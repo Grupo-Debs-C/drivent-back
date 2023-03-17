@@ -11,10 +11,8 @@ async function findAllActivities() {
   return activities;
 }
 
-async function findLocalitiesByDay(date: string) {
-  date = date.slice(0,10)
-
-  const localities = await activityRepository.findLocalitiesByDay(date);
+async function findLocalities() {
+  const localities = await activityRepository.findLocalities();
   if (!localities) {
     throw notFoundError();
   }
@@ -40,7 +38,7 @@ async function findActivitiesByLocalityAndDay(date: string, localityId: number) 
 
 const activitiesService = {
   findAllActivities,
-  findLocalitiesByDay,
+  findLocalities,
   findActivitiesByLocalityAndDay
 };
 
