@@ -13,8 +13,20 @@ export async function getAllActivities(req: AuthenticatedRequest, res: Response)
   }
 }
 
+export async function getLocalitiesByDay(req: AuthenticatedRequest, res: Response) {
+  const { date } = req.body;
+
+  try {
+    const localities = await activitiesService.findLocalitiesByDay(date);
+
+    return res.status(httpStatus.OK).send(localities);
+  } catch (err) {
+    return res.sendStatus(httpStatus.NO_CONTENT)
+  }
+}
+
 export async function getActivitiesByLocalityAndDay(req: AuthenticatedRequest, res: Response) {
-  const { date, localityId }= req.body;
+  const { date, localityId } = req.body;
   try {
     const activities = await activitiesService.findActivitiesByLocalityAndDay(date, localityId);
 
