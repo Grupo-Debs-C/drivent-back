@@ -1,4 +1,4 @@
-import { Locality, PrismaClient } from "@prisma/client";
+import {  PrismaClient } from "@prisma/client";
 import dayjs from "dayjs";
 const prisma = new PrismaClient();
 
@@ -18,6 +18,32 @@ async function main() {
   }
 
   console.log({ event });
+
+  await prisma.ticketType.createMany({
+    data: [
+      {
+        name: 'basic',
+        price: 200,
+        isRemote: true,
+        includesHotel: false,
+        updatedAt: dayjs().toDate()
+      },
+      {
+        name: 'intermediate',
+        price: 230,
+        isRemote: false,
+        includesHotel: false,
+        updatedAt: dayjs().toDate()
+      },
+      {
+        name: 'advanced',
+        price: 300,
+        isRemote: false,
+        includesHotel: true,
+        updatedAt: dayjs().toDate()
+      }
+    ]
+  })
 
   await prisma.locality.createMany({
       data: [
