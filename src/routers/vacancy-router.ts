@@ -5,7 +5,7 @@ import { getVacancyByActivityId } from "@/controllers";
 const vacancyRouter = Router();
 
 vacancyRouter
-  //.all("/*", authenticateToken)
+  .all("/*", authenticateToken)
   .get("", getVacancyByActivityId)
 
 export { vacancyRouter };

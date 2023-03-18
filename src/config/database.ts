@@ -13,14 +13,14 @@ export async function disconnectDB(): Promise<void> {
   await prisma?.$disconnect();
 }
 
-const redis = createClient({
+export const redis = createClient({
   url: process.env.REDIS_URL
 });
 
-async function connectCache() {
+export async function connectCache() {
   await redis.connect();
 }
 
-connectCache();
-
-export { redis };
+export async function disconnectCache() {
+  await redis.disconnect();
+}

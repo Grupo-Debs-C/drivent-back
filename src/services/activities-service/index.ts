@@ -1,6 +1,6 @@
 import { notFoundError } from "@/errors";
 import activityRepository from "@/repositories/activities-repository";
-import activitiesServiceHelpers from "./helpers";
+import activitiesServiceHelpers from "../../utils/helpers";
 
 async function findAllActivities() {
   const activities = await activityRepository.findAllActivities();
@@ -11,8 +11,17 @@ async function findAllActivities() {
   return activities;
 }
 
+async function findLocalities() {
+  const localities = await activityRepository.findLocalities();
+  if (!localities) {
+    throw notFoundError();
+  }
+
+  return localities;
+}
+
 async function findActivitiesByLocalityAndDay(date: string, localityId: number) {
-  const {startDay, endDay} = activitiesServiceHelpers.formatDateEvent(date);
+  const { startDay, endDay } = activitiesServiceHelpers.formatDateEvent(date);
   const activities = await activityRepository.findActivitiesByLocalityAndDay(startDay, endDay, localityId);
   if (!activities) {
     throw notFoundError();
@@ -29,6 +38,7 @@ async function findActivitiesByLocalityAndDay(date: string, localityId: number) 
 
 const activitiesService = {
   findAllActivities,
+  findLocalities,
   findActivitiesByLocalityAndDay
 };
 

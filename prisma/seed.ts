@@ -1,87 +1,110 @@
-import { prisma, redis } from "../src/config";
+import {  PrismaClient } from "@prisma/client";
 import dayjs from "dayjs";
+const prisma = new PrismaClient();
 
 async function main() {
-  let event: (string | null) = await redis.get("event");
-
-  //event = JSON.parse(event || '')
+  let event = await prisma.event.findFirst();
 
   if (!event) {
-    await redis.set("event", JSON.stringify({
+    event = await prisma.event.create({
       data: {
         title: "Driven.t",
         logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
         backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
-        startsAt: dayjs().toDate(),
-        endsAt: dayjs().add(21, "days").toDate(),
-      }, 
-    }));
-
-    await prisma.event.create({
-      data: {
-        title: "Driven.t",
-        logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
-        backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
-        startsAt: dayjs().toDate(),
-        endsAt: dayjs().add(21, "days").toDate(),
-      }})
-    
+        startsAt: dayjs().hour(6).minute(0).second(0).millisecond(0).toDate(),
+        endsAt: dayjs().add(2, "days").hour(20).minute(59).second(59).millisecond(599).toDate(),
+      },
+    });
   }
 
   console.log({ event });
 
-  await prisma.locality.createMany({
-      data: [
-          { id:1, name: "Auditório Principal" },
-          { id:2, name: "Auditório Lateral" },
-          { id:3, name: "Sala de Workshop" }
-        ]
-    })
-  
-  const eventInformation = await prisma.event.findFirst({
-    where:{
-      title: "Driven.t"
-    }
-  });
-
-
-  await prisma.activities.createMany({
+  await prisma.ticketType.createMany({
     data: [
       {
-        Name: "Minecraft: montando o PC ideal", 
-        eventId: Number(eventInformation?.id), 
-        localityId: 1, 
-        startAt: dayjs().add(10, "days").hour(9).minute(0).second(0).format(), 
-        endsAt: dayjs().add(10, "days").hour(10).minute(0).second(0).format(), 
-        vacancyLimit: 30},
+        name: 'basic',
+        price: 200,
+        isRemote: true,
+        includesHotel: false,
+        updatedAt: dayjs().toDate()
+      },
       {
-        Name: "LoL: montando o PC ideal", 
-        eventId: Number(eventInformation?.id), 
-        localityId: 1, 
-        startAt: dayjs().add(10, "days").hour(10).minute(0).second(0).format(), 
-        endsAt: dayjs().add(10, "days").hour(11).minute(0).second(0).format(), 
-        vacancyLimit: 30},
+        name: 'intermediate',
+        price: 230,
+        isRemote: false,
+        includesHotel: false,
+        updatedAt: dayjs().toDate()
+      },
       {
-        Name: "Palestra X", 
-        eventId: Number(eventInformation?.id), 
-        localityId: 2, 
-        startAt: dayjs().add(11, "days").hour(9).minute(0).second(0).format(), 
-        endsAt: dayjs().add(11, "days").hour(11).minute(0).second(0).format(), 
-        vacancyLimit: 30},
-      {
-        Name: "Palestra y", 
-        eventId: Number(eventInformation?.id), 
-        localityId: 3, 
-        startAt: dayjs().add(12, "days").hour(9).minute(0).second(0).format(), 
-        endsAt: dayjs().add(12, "days").hour(10).minute(0).second(0).format(), 
-        vacancyLimit: 30},
-      {
-        Name: "Palestra z", 
-        eventId: Number(eventInformation?.id), 
-        localityId: 3, 
-        startAt: dayjs().add(12, "days").hour(10).minute(0).second(0).format(), 
-        endsAt: dayjs().add(12, "days").hour(11).minute(0).second(0).format(), 
-        vacancyLimit: 3},   
+        name: 'advanced',
+        price: 300,
+        isRemote: false,
+        includesHotel: true,
+        updatedAt: dayjs().toDate()
+      }
+    ]
+  })
+
+  await prisma.hotel.create({
+    data: {
+      name: 'Hotel',
+      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/1a/ea/54/hotel-presidente-4s.jpg?w=700&h=-1&s=1',
+      updatedAt: dayjs().toDate()
+    }
+  })
+
+  await prisma.locality.createMany({
+      data: [
+          { name: "Auditório Principal" },
+          { name: "Auditório Lateral" },
+          { name: "Sala de Workshop" }
+        ]
+    })
+
+  const loc1 = await prisma.locality.findFirst({
+    where: {
+      name: "Auditório Principal"
+    }
+  })
+
+  const loc2 = await prisma.locality.findFirst({
+    where: {
+      name: "Auditório Lateral"
+    }
+  })
+
+  const loc3 = await prisma.locality.findFirst({
+    where: {
+      name: "Sala de Workshop"
+    }
+  })
+
+  await prisma.activities.createMany({
+    data:[
+        {
+          eventId: event.id,
+          localityId: loc1?.id || 0,
+          Name: "Passeio",
+          startAt: dayjs().add(1, "days").hour(6).minute(0).second(0).millisecond(0).toDate(),
+          endsAt: dayjs().hour(6).minute(0).second(0).millisecond(0).add(1, "days").add(2, "hours").toDate(),
+          vacancyLimit: 30
+        },
+        {
+          eventId: event.id,
+          localityId: loc2?.id || 0,
+          Name: "Dinâmica",
+          startAt: dayjs().add(1, "days").hour(6).minute(0).second(0).millisecond(0).toDate(),
+          endsAt: dayjs().hour(6).minute(0).second(0).millisecond(0).add(1, "days").add(2, "hours").toDate(),
+          vacancyLimit: 20
+        },
+        {
+          eventId: event.id,
+          localityId: loc3?.id || 0,
+          Name: "Palestra",
+          startAt: dayjs().add(1, "days").hour(6).minute(0).second(0).millisecond(0).toDate(),
+          endsAt: dayjs().hour(6).minute(0).second(0).millisecond(0).add(1, "days").add(2, "hours").toDate(),
+          vacancyLimit: 60
+        }
     ]
   })
 }
