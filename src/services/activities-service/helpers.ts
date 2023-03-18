@@ -5,10 +5,10 @@ function formatDateEvent(date: string){
     const day = date.slice(0, 2);
     const month = date.slice(-2);
 
-    const startDay = `$2023-${month}-${day} 06:00:00.000`; //para começar sempre 9 da manhã (+fuso horário)
-    const endDay = `$2023-${month}-${day} 23:59:59.599`;
+    const startDay = `2023-${month}-${day} 06:00:00.000`; //para começar sempre 9 da manhã (+fuso horário)
+    const endDay = `2023-${month}-${day} 20:59:59.599`;
 
-    return {startDay, endDay}
+    return { startDay, endDay }
 }
 
 function checkDuration(startAt: string, endAt: string){

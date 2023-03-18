@@ -4,6 +4,10 @@ async function findAllActivities() {
   return prisma.activities.findMany();
 }
 
+async function findLocalities() {
+  return prisma.locality.findMany({});
+}
+
 async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, localityId: number) {
   return prisma.activities.findMany({
     where: {
@@ -17,9 +21,10 @@ async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, 
     }
   });
 }
- 
+
 const activityRepository = {
   findAllActivities,
+  findLocalities,
   findActivitiesByLocalityAndDay
 };
 
