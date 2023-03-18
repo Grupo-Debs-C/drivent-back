@@ -28,6 +28,7 @@ function approvedActivities(activities: Activities[]){
 
 const activitiesServiceHelpers = {
     formatDateEvent,
+    checkDuration,
     approvedActivities
   };
   

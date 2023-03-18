@@ -1,6 +1,6 @@
 import { AuthenticatedRequest } from "@/middlewares";
 import activitiesService from "@/services/activities-service";
-import { Request, Response } from "express";
+import { Response } from "express";
 import httpStatus from "http-status";
 
 export async function getAllActivities(req: AuthenticatedRequest, res: Response) {

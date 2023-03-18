@@ -1,6 +1,6 @@
 import { notFoundError } from "@/errors";
 import activityRepository from "@/repositories/activities-repository";
-import activitiesServiceHelpers from "./helpers";
+import activitiesServiceHelpers from "../../utils/helpers";
 
 async function findAllActivities() {
   const activities = await activityRepository.findAllActivities();
