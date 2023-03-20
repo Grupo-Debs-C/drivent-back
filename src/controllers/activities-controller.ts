@@ -24,9 +24,9 @@ export async function getLocalities(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function getActivitiesByLocalityAndDay(req: AuthenticatedRequest, res: Response) {
-  const { date, localityId } = req.body;
+  const { date, localityId } = req.query;
   try {
-    const activities = await activitiesService.findActivitiesByLocalityAndDay(date, localityId);
+    const activities = await activitiesService.findActivitiesByLocalityAndDay(String(date), Number(localityId));
 
     return res.status(httpStatus.OK).send(activities);
   } catch (error) {
