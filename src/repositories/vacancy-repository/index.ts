@@ -8,8 +8,18 @@ async function findVacancyByActivityId(activityId: number) {
   });
 }
 
+async function postVacancy(activityId: number, ticketId: number) {
+  return prisma.vacancy.create({
+    data: {
+      ticketId: ticketId,
+      activitiesId: activityId
+    }
+  });
+};
+
 const vacancyRepository = {
-    findVacancyByActivityId
+    findVacancyByActivityId,
+    postVacancy
   };
   
   export default vacancyRepository;
