@@ -19,10 +19,11 @@ export async function postVacancy(req: AuthenticatedRequest, res: Response) {
   const { activityId, ticketId } = req.body;
 
   try {
-    const response = await vacancyService.postVacancy(activityId, ticketId);
+    await vacancyService.postVacancy(activityId, ticketId);
 
-    return res.status(httpStatus.OK).send(response);
+    return res.status(200).send("Tudo certo!");
   } catch (e) {
-    return res.sendStatus(httpStatus.NOT_FOUND);
+    console.log(e);
+    return res.sendStatus(404);
   }
 };

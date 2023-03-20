@@ -7,27 +7,30 @@ async function findVacancyByActivityId(activityId: number) {
   const vacancy = await vacancyRepository.findVacancyByActivityId(activityId);
 
   if (!vacancy) {
+    console.log("nao tem vaga kaka");
     throw notFoundError();
   }
-  return {booked: vacancy.length};
+  return { booked: vacancy.length };
 }
 
 async function postVacancy(activityId: number, ticketId: number) {
   const ticket = await ticketRepository.findTickeyById(ticketId);
-  if (!ticket)
+  if (!ticket) {
     throw notFoundError();
-  
+  }
+
   const activity = await activityRepository.findActivityById(activityId);
-  if (!activity)
+  if (!activity){
     throw notFoundError();
-  
+  }
+    
   const vacancy = await vacancyRepository.postVacancy(activityId, ticketId);
   return vacancy.id;
 };
 
 const vacancyService = {
-    findVacancyByActivityId,
-    postVacancy
-  };
-  
+  findVacancyByActivityId,
+  postVacancy
+};
+
 export default vacancyService;
