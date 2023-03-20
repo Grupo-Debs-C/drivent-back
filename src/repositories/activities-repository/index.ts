@@ -1,4 +1,5 @@
 import { prisma } from "@/config";
+import { Activities,Locality } from "@prisma/client";
 
 async function findAllActivities() {
   return prisma.Activities.findMany({
