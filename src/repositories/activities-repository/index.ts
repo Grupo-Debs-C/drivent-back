@@ -2,7 +2,7 @@ import { prisma } from "@/config";
 import { Activities,Locality } from "@prisma/client";
 
 async function findAllActivities() {
-  return prisma.Activities.findMany({
+  return prisma.activities.findMany({
     include: {
       Vacancy: true
     }
@@ -10,17 +10,17 @@ async function findAllActivities() {
 }
 
 async function findActivityById(activityId: number) {
-  return prisma.Activities.findFirst({
+  return prisma.activities.findFirst({
     where: { id: activityId }
   });
 }
 
 async function findLocalities() {
-  return prisma.Locality.findMany({});
+  return prisma.locality.findMany({});
 }
 
 async function findActivitiesByLocalityAndDay(startDay: string, endDay: string, localityId: number) {
-  return prisma.Activities.findMany({
+  return prisma.activities.findMany({
     where: {
       localityId,
       startAt: {
